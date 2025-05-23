@@ -1,17 +1,10 @@
-def finite_difference(y, h=1):
-    # Số điểm
-    n = len(y)               
-    # Tạo danh sách kết quả với n phần tử 0.0
-    dy = [0.0] * n          
+import numpy as np
 
-    # Sai phân tiến cho điểm đầu tiên
-    dy[0] = (y[1] - y[0]) / h
-
-    # Sai phân trung tâm cho các điểm giữa
-    for i in range(1, n - 1):
-        dy[i] = (y[i + 1] - y[i - 1]) / (2 * h)
-
-    # Sai phân lùi cho điểm cuối cùng
-    dy[n - 1] = (y[n - 1] - y[n - 2]) / h
-
+def spline_derivative_at_points(x, b, c, d):
+    n = len(x)
+    dy = np.zeros(n)
+    for i in range(n-1):
+        dx = 0  # đạo hàm tại điểm x[i], dx = 0
+        dy[i] = b[i] + 2*c[i]*dx + 3*d[i]*dx**2  # = b[i]
+    dy[-1] = dy[-2]  # gán đạo hàm điểm cuối giống điểm liền trước (hoặc tùy cách xử lý)
     return dy

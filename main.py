@@ -1,8 +1,8 @@
 
 import numpy as np
 import pandas as pd
-from utils.interpolation import custom_cubic_spline
-from utils.derivative import finite_difference
+from utils.interpolation import cubic_spline_coefficients, spline_evaluate
+from utils.derivative import spline_derivative_at_points
 from visualization.plot import plot_all
 
 
@@ -18,12 +18,11 @@ def main():
 
     # Interpolation (custom implementation)
     x_spline = np.linspace(x[0], x[-1], 500)
-    y_spline = custom_cubic_spline(x, y, x_spline)
+    b, c, d = cubic_spline_coefficients(x, y)
+    y_spline = spline_evaluate(x, y, b, c, d, x_spline)
+    dy = spline_derivative_at_points(x, b, c, d)
 
     extrapolation_range = 10
-
-    # Derivative estimation
-    dy = finite_difference(y)
 
     # Visualization
     plot_all(x, y, x_spline, y_spline, dy,extrapolation_range )
