@@ -1,0 +1,32 @@
+import yfinance as yf
+import pandas as pd
+import os
+
+def save_stock_data_to_csv(ticker: str, start: str, end: str):
+    data = yf.download(ticker, start=start, end=end)
+
+    # Chỉ giữ lại cột Date và Close
+    df = data[['Close']].copy()
+    df.reset_index(inplace=True)  # Giữ cột Date
+
+    # Định dạng lại ngày
+    start_fmt = start.replace('-', '')
+    end_fmt = end.replace('-', '')
+
+    # Tạo đường dẫn thư mục và tên file
+    folder_path = "data/csv"
+    os.makedirs(folder_path, exist_ok=True)  # Tạo thư mục nếu chưa có
+
+    filename = f"{ticker.upper()}_{start_fmt}_{end_fmt}.csv"
+    filepath = os.path.join(folder_path, filename)
+
+    # Lưu ra CSV
+    df.to_csv(filepath, index=False)
+    print(f"Đã lưu dữ liệu vào {filepath}")
+    return filepath
+
+save_stock_data_to_csv(
+    ticker='AAPL',
+    start='2023-01-01',
+    end='2024-01-01'
+)

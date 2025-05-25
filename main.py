@@ -1,6 +1,9 @@
 
 import numpy as np
 import pandas as pd
+import argparse
+import os
+from data.data import save_stock_data_to_csv
 from utils.interpolation import cubic_spline_coefficients, spline_evaluate
 from utils.derivative import spline_derivative_at_points
 from visualization.plot import plot_all
@@ -8,12 +11,19 @@ from visualization.plot import plot_all
 
 
 def main():
-    # Load data (Date, Close)
-    df = pd.read_csv("data/stock.csv")
+    parser = argparse.ArgumentParser(description="Spline interpolation on stock data")
+    parser.add_argument("csv_file", type=str, help="Path to the CSV file (must include 'Close' column)")
+    args = parser.parse_args()
+
+    
+    # Ensure the CSV file is in the 'data/csv' directory
+    csv_path = os.path.join("data", "csv", args.csv_file)
+    # Load data from the provided CSV file
+    df = pd.read_csv(csv_path)
     df = df.dropna()
     df = df.reset_index(drop=True)
 
-    y = df['Close'].values
+    y = df['Close'].astype(float).values
     x = np.arange(len(y))
 
     # Interpolation (custom implementation)
