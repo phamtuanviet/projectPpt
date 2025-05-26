@@ -1,5 +1,6 @@
 import numpy as np
 
+# Hàm tính đạo hàm của spline bậc ba tại các điểm x
 def spline_derivative_at_points(x, b, c, d):
     n = len(x)
     dy = np.zeros(n)

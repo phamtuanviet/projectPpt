@@ -7,7 +7,9 @@ def save_stock_data_to_csv(ticker: str, start: str, end: str):
 
     # Chỉ giữ lại cột Date và Close
     df = data[['Close']].copy()
-    df.reset_index(inplace=True)  # Giữ cột Date
+
+    # Di chuyển chỉ mục (Date) vào thành một cột thông thường,
+    df.reset_index(inplace=True)
 
     # Định dạng lại ngày
     start_fmt = start.replace('-', '')
@@ -27,6 +29,6 @@ def save_stock_data_to_csv(ticker: str, start: str, end: str):
 
 save_stock_data_to_csv(
     ticker='AAPL',
-    start='2023-01-01',
-    end='2024-01-01'
+    start='2025-01-01',
+    end='2025-04-01'
 )

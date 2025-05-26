@@ -3,12 +3,9 @@ import numpy as np
 import pandas as pd
 import argparse
 import os
-from data.data import save_stock_data_to_csv
 from utils.interpolation import cubic_spline_coefficients, spline_evaluate
 from utils.derivative import spline_derivative_at_points
 from visualization.plot import plot_all
-
-
 
 def main():
     parser = argparse.ArgumentParser(description="Spline interpolation on stock data")
@@ -32,7 +29,7 @@ def main():
     y_spline = spline_evaluate(x, y, b, c, d, x_spline)
     dy = spline_derivative_at_points(x, b, c, d)
 
-    extrapolation_range = 10
+    extrapolation_range = 50
 
     # Visualization
     plot_all(x, y, x_spline, y_spline, dy,extrapolation_range )

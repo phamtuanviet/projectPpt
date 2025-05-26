@@ -1,10 +1,16 @@
 import numpy as np
 
+# Hàm tính hệ số của spline bậc ba
+# Dựa trên thuật toán giải hệ phương trình tuyến tính
 def cubic_spline_coefficients(x, y):
     n = len(x)
     h = np.diff(x)
+
+    # Tính toán hệ số alpha
     alpha = [0] + [3 * ((y[i+1]-y[i])/h[i] - (y[i]-y[i-1])/h[i-1]) for i in range(1, n-1)]
 
+    # Tạo ma trận hệ phương trình
+    # và vector hệ số
     l = np.ones(n)
     mu = np.zeros(n)
     z = np.zeros(n)
@@ -25,6 +31,8 @@ def cubic_spline_coefficients(x, y):
 
     return b, c, d
 
+# Hàm đánh giá giá trị của spline tại các điểm mới
+# x_new là mảng các điểm cần đánh giá
 def spline_evaluate(x, y, b, c, d, x_new):
     n = len(x)
     y_new = np.zeros_like(x_new)

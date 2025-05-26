@@ -43,6 +43,7 @@ def least_squares_fit(x, y, degree):
 
     return coeffs
 
+# Tính giá trị của đa thức tại điểm x
 def evaluate_polynomial(coeffs, x):
     result = 0
     for i in range(len(coeffs)):

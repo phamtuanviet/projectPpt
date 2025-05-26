@@ -7,9 +7,7 @@ def plot_all(x, y, x_spline, y_spline,dy,extrapolation_range):
     degrees = [1, 2, 3]
     colors = ['r', 'g', 'b']
 
-
     plt.figure(figsize=(12, 6))
-
         
     plt.plot(x, y, 'o', label='Original Data')
     plt.plot(x_spline, y_spline, '-', label='Spline Interpolation')
