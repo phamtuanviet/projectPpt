@@ -26,10 +26,11 @@ def main():
     # Interpolation (custom implementation)
     x_spline = np.linspace(x[0], x[-1], 500)
     b, c, d = cubic_spline_coefficients(x, y)
+    # print(y,b,c,d))
     y_spline = spline_evaluate(x, y, b, c, d, x_spline)
     dy = spline_derivative_at_points(x, b, c, d)
 
-    extrapolation_range = 50
+    extrapolation_range = 0
 
     # Visualization
     plot_all(x, y, x_spline, y_spline, dy,extrapolation_range )

@@ -28,7 +28,14 @@ def save_stock_data_to_csv(ticker: str, start: str, end: str):
     return filepath
 
 save_stock_data_to_csv(
-    ticker='AAPL',
-    start='2025-01-01',
-    end='2025-04-01'
+    ticker='NFLX',
+    start='2022-05-01',
+    end='2024-05-01'
+)
+
+
+save_stock_data_to_csv(
+    ticker='TSLA',
+    start='2024-06-01',
+    end='2025-05-28'
 )
